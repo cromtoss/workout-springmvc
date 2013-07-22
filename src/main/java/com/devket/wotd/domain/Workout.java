@@ -1,5 +1,7 @@
 package com.devket.wotd.domain;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: crosta
@@ -8,4 +10,6 @@ package com.devket.wotd.domain;
  * To change this template use File | Settings | File Templates.
  */
 public class Workout {
+
+	private List<Exercise> exercises;
 }

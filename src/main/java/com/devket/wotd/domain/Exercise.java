@@ -1,5 +1,7 @@
 package com.devket.wotd.domain;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: crosta
@@ -11,7 +13,7 @@ public class Exercise {
 
     private String id;
     private String name;
-    private ExerciseTarget exerciseTarget;
+    private List<ExerciseTarget> exerciseTarget;
     private String description;
 
 
