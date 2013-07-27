@@ -1,15 +1,17 @@
 package com.devket.wotd.domain;
 
+import javax.persistence.Entity;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: crosta
- * Date: 7/21/13
- * Time: 5:28 PM
- * To change this template use File | Settings | File Templates.
+ * tcTODO
+ *
+ * Created: 7/21/13 5:28 PM
  */
+
+@Entity
 public class Workout {
 
+    private long id;
 	private List<Exercise> exercises;
 }
