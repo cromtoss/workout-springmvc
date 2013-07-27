@@ -79,26 +79,25 @@
 		  <version>${org.springframework.version}</version>
 		</dependency>
 
-		<!--
-			JDBC Data Access Library (depends on core, beans, context, transaction)
-			Define this if you use Spring's JdbcTemplate API (org.springframework.jdbc.*)
-		-->
-		<dependency>
-		  <groupId>org.springframework</groupId>
-		  <artifactId>org.springframework.jdbc</artifactId>
-		  <version>${org.springframework.version}</version>
-		</dependency>
+        <!-- Database/ORM. Hibernate JPA with Spring Data. -->
 
-		<!--
-			Object-to-Relation-Mapping (ORM) integration with Hibernate, JPA, and iBatis.
-			(depends on core, beans, context, transaction)
-			Define this if you need ORM (org.springframework.orm.*)
-		-->
-		<dependency>
-		  <groupId>org.springframework</groupId>
-		  <artifactId>org.springframework.orm</artifactId>
-		  <version>${org.springframework.version}</version>
-		</dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>4.2.3.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.2.3.Final</version>
+        </dependency>
+
+        <dependency>
+         <groupId>org.springframework.data</groupId>
+         <artifactId>spring-data-jpa</artifactId>
+         <version>1.3.2.RELEASE</version>
+        </dependency>
 
 		<!--
 			Web app development utilities common across Servlet/Portlet environments (depends on core, beans, context)
