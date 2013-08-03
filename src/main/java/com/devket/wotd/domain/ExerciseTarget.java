@@ -1,6 +1,8 @@
 package com.devket.wotd.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * tcTODO
@@ -11,7 +13,25 @@ import javax.persistence.Entity;
 @Entity
 public class ExerciseTarget {
 
+    @Id
+    @GeneratedValue
     public long id;
+
     public String targetName;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTargetName() {
+        return targetName;
+    }
+
+    public void setTargetName(String targetName) {
+        this.targetName = targetName;
+    }
 }
