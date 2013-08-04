@@ -1,5 +1,7 @@
 package com.devket.wotd.init;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
 import org.hibernate.ejb.HibernatePersistence;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -8,7 +10,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
 import java.util.Properties;
 
 /**
@@ -48,19 +50,36 @@ public final class WebAppConfig {
    	@Resource
    	private Environment env;
 
-   	@Bean
+    /**
+     * Gets a Java built-in paradigmatic data source, using the c3p0 connection pooler.
+     *
+     * @return
+     *  the data source
+     */
+    @Bean
    	public DataSource dataSource() {
-   		DriverManagerDataSource dataSource = new DriverManagerDataSource();    //tcTODO use c3p0 here?
+   		ComboPooledDataSource dataSource = new ComboPooledDataSource();    //tcTODO destroy-method == close() ???
 
-   		dataSource.setDriverClassName(env.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
-   		dataSource.setUrl(env.getRequiredProperty(PROPERTY_NAME_DATABASE_URL));
-   		dataSource.setUsername(env.getRequiredProperty(PROPERTY_NAME_DATABASE_USERNAME));
+        try {
+   		    dataSource.setDriverClass(env.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
+        } catch (PropertyVetoException ex) {
+            throw new IllegalStateException(ex);
+        }
+
+   		dataSource.setJdbcUrl(env.getRequiredProperty(PROPERTY_NAME_DATABASE_URL));
+   		dataSource.setUser(env.getRequiredProperty(PROPERTY_NAME_DATABASE_USERNAME));
    		dataSource.setPassword(env.getRequiredProperty(PROPERTY_NAME_DATABASE_PASSWORD));
 
    		return dataSource;
    	}
 
-   	@Bean
+    /**
+     * Provides a concrete JPA {@link javax.persistence.EntityManagerFactory}, by way of Spring ORM & Hibernate.
+     *
+     * @return
+     *  an entity manager factory
+     */
+    @Bean
    	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
    		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
    		entityManagerFactoryBean.setDataSource(dataSource());
@@ -72,6 +91,12 @@ public final class WebAppConfig {
    		return entityManagerFactoryBean;
    	}
 
+    /**
+     * Gets the Hibernate properties from the all-purpose properties file placed on the classpath.
+     *
+     * @return
+     *  the Hibernate properties, as {@link Properties}.
+     */
    	private Properties hibProperties() {
    		Properties properties = new Properties();
    		properties.put(PROPERTY_HIBERNATE_DIALECT,	env.getRequiredProperty(PROPERTY_HIBERNATE_DIALECT));
@@ -80,7 +105,14 @@ public final class WebAppConfig {
    		return properties;
    	}
 
-   	@Bean
+
+    /**
+     * Provide a {@link org.springframework.transaction.PlatformTransactionManager} to the Spring framework.
+     * Provides transactional proxies (using Spring AOP) for classes annotated with {@code @Transactional}.
+     *
+     * Spring will automatically recognize this bean as the transaction manager based on its name, by convention.
+     */
+    @Bean
    	public JpaTransactionManager transactionManager() {
    		JpaTransactionManager transactionManager = new JpaTransactionManager();
    		transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());

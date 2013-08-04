@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 @Service
-public final class ExerciseServiceImpl implements ExerciseService {
+public class ExerciseServiceImpl implements ExerciseService {
 
     @Resource
     private ExerciseRepository exerciseRepository;
@@ -41,7 +41,7 @@ public final class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Exercise> findAll() {
         return exerciseRepository.findAll();
     }
