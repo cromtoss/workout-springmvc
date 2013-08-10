@@ -1,4 +1,4 @@
 wotd-springmvc
 ==============
 
-A Word of the Day web application built using a typical Spring MVC (Spring 3) stack.
+A web application to build random workouts, built using a Spring MVC stack.
