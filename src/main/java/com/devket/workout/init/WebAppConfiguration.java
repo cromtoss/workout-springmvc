@@ -13,9 +13,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.view.JstlView;
-import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.thymeleaf.spring3.SpringTemplateEngine;
+import org.thymeleaf.spring3.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.thymeleaf.templateresolver.TemplateResolver;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -23,7 +26,7 @@ import java.beans.PropertyVetoException;
 import java.util.Properties;
 
 /**
- * tcTODO
+ * The main Spring configuration file for the web application.
  * <p/>
  * Created: 8/3/13 3:16 PM
  */
@@ -34,7 +37,7 @@ import java.util.Properties;
 @ComponentScan("com.devket.workout")
 @PropertySource("classpath:application.properties")
 @EnableJpaRepositories("com.devket.workout.repository")
-public final class WebAppConfig {
+public final class WebAppConfiguration {
 
     private static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
    	private static final String PROPERTY_NAME_DATABASE_PASSWORD = "db.password";
@@ -120,12 +123,19 @@ public final class WebAppConfig {
    	}
 
    	@Bean
-   	public UrlBasedViewResolver setupViewResolver() {
-   		UrlBasedViewResolver resolver = new UrlBasedViewResolver();
-   		resolver.setPrefix("/WEB-INF/pages/");
-   		resolver.setSuffix(".jsp");
-   		resolver.setViewClass(JstlView.class);
-   		return resolver;
+   	public ViewResolver viewResolver() {
+        final TemplateResolver templateResolver = new ClassLoaderTemplateResolver(); //thymeleaf template resolver
+        templateResolver.setTemplateMode("XHTML");
+        templateResolver.setPrefix("/WEB-INF/templates/");
+        templateResolver.setSuffix(".html");
+
+        final SpringTemplateEngine templateEngine = new SpringTemplateEngine(); //thymeleaf template engine for Spring MVC
+        templateEngine.setTemplateResolver(templateResolver);
+
+        final ThymeleafViewResolver viewResolver = new ThymeleafViewResolver(); //thymeleaf implementation for Spring ViewResolver.
+        viewResolver.setTemplateEngine(templateEngine);
+
+   		return viewResolver;
    	}
 
    	@Bean
