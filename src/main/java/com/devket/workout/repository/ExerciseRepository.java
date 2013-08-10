@@ -1,6 +1,6 @@
-package com.devket.wotd.repository;
+package com.devket.workout.repository;
 
-import com.devket.wotd.domain.Exercise;
+import com.devket.workout.domain.Exercise;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

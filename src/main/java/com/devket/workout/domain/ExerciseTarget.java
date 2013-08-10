@@ -1,4 +1,4 @@
-package com.devket.wotd.domain;
+package com.devket.workout.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

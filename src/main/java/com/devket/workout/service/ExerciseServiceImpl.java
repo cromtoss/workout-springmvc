@@ -1,8 +1,8 @@
-package com.devket.wotd.service;
+package com.devket.workout.service;
 
-import com.devket.wotd.domain.Exercise;
-import com.devket.wotd.exception.ExerciseNotFoundException;
-import com.devket.wotd.repository.ExerciseRepository;
+import com.devket.workout.domain.Exercise;
+import com.devket.workout.exception.ExerciseNotFoundException;
+import com.devket.workout.repository.ExerciseRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,4 +1,4 @@
-package com.devket.wotd.init;
+package com.devket.workout.init;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
@@ -31,9 +31,9 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan("com.devket.wotd")
+@ComponentScan("com.devket.workout")
 @PropertySource("classpath:application.properties")
-@EnableJpaRepositories("com.devket.wotd.repository")
+@EnableJpaRepositories("com.devket.workout.repository")
 public final class WebAppConfig {
 
     private static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";

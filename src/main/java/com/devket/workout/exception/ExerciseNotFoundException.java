@@ -1,4 +1,4 @@
-package com.devket.wotd.exception;
+package com.devket.workout.exception;
 
 /**
  * tcTODO

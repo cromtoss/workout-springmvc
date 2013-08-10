@@ -30,6 +30,8 @@
 		<org.springframework.version>3.2.3.RELEASE</org.springframework.version>
 		<webflow.version>2.3.2.RELEASE</webflow.version>
         <hibernate.version>4.2.3.Final</hibernate.version>
+        <thymeleaf.version>2.0.17</thymeleaf.version>
+        <thymeleaf.test.version>2.0.3</thymeleaf.test.version>
 	</properties>
 
 	<dependencies>
@@ -81,7 +83,6 @@
 		</dependency>
 
         <!-- ORM. Hibernate JPA (entitymanager) with Spring Data JPA. -->
-
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -101,7 +102,6 @@
         </dependency>
 
         <!-- Database: PostgreSQL driver with c3p0 database pooling -->
-
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -165,6 +165,27 @@
 		    <artifactId>org.springframework.webflow</artifactId>
 		    <version>2.3.2.RELEASE</version>
 		</dependency>
+
+        <!--
+            Thymeleaf for JSP Replacement
+        -->
+      		<dependency>
+      		  <groupId>org.thymeleaf</groupId>
+      		  <artifactId>thymeleaf</artifactId>
+      		  <version>${thymeleaf.version}</version>
+      		</dependency>
+
+            <dependency>
+      		  <groupId>org.thymeleaf</groupId>
+      		  <artifactId>thymeleaf-spring3</artifactId>
+      		  <version>${thymeleaf.version}</version>
+      		</dependency>
+
+            <dependency>
+              <groupId>org.thymeleaf</groupId>
+              <artifactId>thymeleaf-testing</artifactId>
+              <version>${thymeleaf.test.version}</version>
+            </dependency>
 
 		<!--
 		   Hibernate reference implementation for JSR-303
