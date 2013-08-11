@@ -37,7 +37,7 @@ import java.util.Properties;
 @ComponentScan("com.devket.workout")
 @PropertySource("classpath:application.properties")
 @EnableJpaRepositories("com.devket.workout.repository")
-public final class WebAppConfiguration {
+public class WebAppConfiguration {
 
     private static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
    	private static final String PROPERTY_NAME_DATABASE_PASSWORD = "db.password";
@@ -59,9 +59,9 @@ public final class WebAppConfiguration {
      * @return
      *  the data source
      */
-    @Bean
+    @Bean(destroyMethod="close")
    	public DataSource dataSource() {
-   		ComboPooledDataSource dataSource = new ComboPooledDataSource();    //tcTODO destroy-method == close() ???
+   		ComboPooledDataSource dataSource = new ComboPooledDataSource();
 
         try {
    		    dataSource.setDriverClass(env.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
@@ -138,11 +138,12 @@ public final class WebAppConfiguration {
    		return viewResolver;
    	}
 
-   	@Bean
-   	public ResourceBundleMessageSource messageSource() {
-   		ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-   		source.setBasename(env.getRequiredProperty("message.source.basename"));
-   		source.setUseCodeAsDefaultMessage(true);
-   		return source;
-   	}
+    //tcTODO i18n
+//   	@Bean
+//   	public ResourceBundleMessageSource messageSource() {
+//   		ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+//   		source.setBasename(env.getRequiredProperty("message.source.basename"));
+//   		source.setUseCodeAsDefaultMessage(true);
+//   		return source;
+//   	}
 }

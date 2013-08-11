@@ -1,8 +1,6 @@
 package com.devket.workout.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -19,8 +17,15 @@ public class Exercise {
     private long id;
 
     private String name;
-    private List<ExerciseTarget> exerciseTarget;
     private String description;
+
+    @ManyToMany
+    @JoinTable(
+        name="Exercise_ExerciseTarget",
+        joinColumns={@JoinColumn(name="ExerciseID", referencedColumnName="id")},
+        inverseJoinColumns={@JoinColumn(name="ExerciseTargetID", referencedColumnName="id")}
+    )
+    private List<ExerciseTarget> exerciseTarget;
 
     public long getId() {
         return id;
