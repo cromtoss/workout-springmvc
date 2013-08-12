@@ -54,3 +54,7 @@ Desktop.ini
 # Recycle Bin used on file shares
 ######################
 $RECYCLE.BIN/
+
+# Atlassian IDEA IDE Plugin Config
+######################
+atlassian-ide-plugin.xml
