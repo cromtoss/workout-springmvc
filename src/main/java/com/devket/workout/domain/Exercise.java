@@ -1,7 +1,13 @@
 package com.devket.workout.domain;
 
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 /**
  * tcTODO
@@ -12,46 +18,73 @@ import java.util.List;
 @Entity
 public class Exercise {
 
-    @Id
-    @GeneratedValue
-    private long id;
+	@Id
+	@GeneratedValue
+	private long id;
 
-    private String name;
-    private String description;
+	private String name;
+	private String description;
+	private String imagePath;
 
-    @ManyToMany
-    @JoinTable(
-        name="Exercise_ExerciseTarget",
-        joinColumns={@JoinColumn(name="ExerciseID", referencedColumnName="id")},
-        inverseJoinColumns={@JoinColumn(name="ExerciseTargetID", referencedColumnName="id")}
-    )
-    private List<ExerciseTarget> exerciseTarget;
+	@ManyToMany
+	@JoinTable(
+		name = "Exercise_ExerciseTarget",
+		joinColumns = {
+			@JoinColumn(name = "ExerciseID", referencedColumnName = "id")
+		},
+		inverseJoinColumns = {
+			@JoinColumn(name = "ExerciseTargetID", referencedColumnName = "id")
+		}
+	)
+	private List<ExerciseTarget> exerciseTarget;
 
-    public long getId() {
-        return id;
-    }
 
-    public String getName() {
-        return name;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public List<ExerciseTarget> getExerciseTarget() {
-        return exerciseTarget;
-    }
+	public List<ExerciseTarget> getExerciseTarget() {
+		return exerciseTarget;
+	}
 
-    public void setExerciseTarget(List<ExerciseTarget> exerciseTarget) {
-        this.exerciseTarget = exerciseTarget;
-    }
 
-    public String getDescription() {
-        return description;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public void setExerciseTarget(List<ExerciseTarget> exerciseTarget) {
+		this.exerciseTarget = exerciseTarget;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

@@ -1,0 +1,31 @@
+{
+	"name" : "Bird-Dog",
+	"target" : "core",
+	"description" : "On hands and knees, extend opposite arm and leg. Alternate both sides for one rep.",
+	"imagePath" : "birddog.jpg"
+},
+{
+	"name" : "Superman",
+	"target" : "core",
+	"description" : "Lay on stomach with arms and legs extended. Raise arms and legs simultaneously and hold for 2 seconds. Keep abs and glutes tight.",
+	"imagePath" : "superman.jpg"
+},
+{
+	"name" : "Russian Twist",
+	"target" : "core",
+	"description" : "Arms can be against chest, extended fully, or holding a medicine ball. Legs can be raised or left on ground for less difficulty. Twist both ways for one rep.",
+	"imagePath" : "russian_twist.jpg"
+},
+{
+	"name" : "Bird-Dog With Knee Tuck",
+	"target" : "core",
+	"description" : "On hands and knees, extend opposite arm and leg. Tuck in knee and touch to elbow before returning to square. Alternate both sides for one rep.",
+	"imagePath" : "birddog_advanced.jpg"
+}
+
+//{
+//	"name" : "",
+//	"target" : "",
+//	"description" : "",
+//	"imagePath" : ""
+//},

@@ -84,7 +84,7 @@ public class WebAppConfiguration {
      */
     @Bean
    	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-   		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+   		final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
    		entityManagerFactoryBean.setDataSource(dataSource());
    		entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistence.class);
    		entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN));
@@ -101,7 +101,7 @@ public class WebAppConfiguration {
      *  the Hibernate properties, as {@link Properties}.
      */
    	private Properties hibProperties() {
-   		Properties properties = new Properties();
+   		final Properties properties = new Properties();
    		properties.put(PROPERTY_HIBERNATE_DIALECT,	env.getRequiredProperty(PROPERTY_HIBERNATE_DIALECT));
    		properties.put(PROPERTY_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROPERTY_HIBERNATE_SHOW_SQL));
         properties.put(PROPERTY_HIBERNATE_AUTOCREATE, env.getRequiredProperty(PROPERTY_HIBERNATE_AUTOCREATE));
@@ -117,7 +117,7 @@ public class WebAppConfiguration {
      */
     @Bean
    	public JpaTransactionManager transactionManager() {
-   		JpaTransactionManager transactionManager = new JpaTransactionManager();
+   		final JpaTransactionManager transactionManager = new JpaTransactionManager();
    		transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
    		return transactionManager;
    	}

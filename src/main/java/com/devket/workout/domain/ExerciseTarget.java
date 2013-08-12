@@ -13,25 +13,40 @@ import javax.persistence.Id;
 @Entity
 public class ExerciseTarget {
 
-    @Id
-    @GeneratedValue
-    public long id;
+	@Id
+	@GeneratedValue
+	private long id;
 
-    public String targetName;
+	private String targetCode;
+	private String targetDescription;
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public String getTargetName() {
-        return targetName;
-    }
 
-    public void setTargetName(String targetName) {
-        this.targetName = targetName;
-    }
+	public String getTargetCode() {
+		return targetCode;
+	}
+
+
+	public String getTargetDescription() {
+		return targetDescription;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	public void setTargetCode(String targetCode) {
+		this.targetCode = targetCode;
+	}
+
+
+	public void setTargetDescription(String targetDescription) {
+		this.targetDescription = targetDescription;
+	}
 }
