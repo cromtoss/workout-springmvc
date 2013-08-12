@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -47,7 +46,6 @@ public class WebAppConfiguration {
    	private static final String PROPERTY_HIBERNATE_DIALECT = "hibernate.dialect";
     private static final String PROPERTY_HIBERNATE_AUTOCREATE = "hibernate.hbm2ddl.auto";
    	private static final String PROPERTY_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
-
    	private static final String PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
 
    	@Resource
@@ -61,7 +59,7 @@ public class WebAppConfiguration {
      */
     @Bean(destroyMethod="close")
    	public DataSource dataSource() {
-   		ComboPooledDataSource dataSource = new ComboPooledDataSource();
+   		final ComboPooledDataSource dataSource = new ComboPooledDataSource();
 
         try {
    		    dataSource.setDriverClass(env.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
@@ -134,6 +132,9 @@ public class WebAppConfiguration {
 
         final ThymeleafViewResolver viewResolver = new ThymeleafViewResolver(); //thymeleaf implementation for Spring ViewResolver.
         viewResolver.setTemplateEngine(templateEngine);
+		viewResolver.setOrder(1);
+		final String[] viewNames = {"*.html","*.xhtml"};
+		viewResolver.setViewNames(viewNames);
 
    		return viewResolver;
    	}
