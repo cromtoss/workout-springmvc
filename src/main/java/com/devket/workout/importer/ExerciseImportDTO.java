@@ -5,16 +5,18 @@
 
 package com.devket.workout.importer;
 
+import java.util.List;
+
 /**
  *  A simple DTO type object to store records imported from JSON.
  *
  *  @author Tom Cross
  *  @version $Revision: #1 $ submitted $DateTime: 2013/08/12 10:54:00 $ by $Author: CROSTA $	
  */
-public final class ExerciseImport {
+public final class ExerciseImportDTO {
 
 	private String name;
-	private String target;
+	private List<String> targets;
 	private String description;
 	private String imagePath;
 
@@ -24,8 +26,8 @@ public final class ExerciseImport {
 	}
 
 
-	public String getTarget() {
-		return target;
+	public List<String> getTargets() {
+		return targets;
 	}
 
 
