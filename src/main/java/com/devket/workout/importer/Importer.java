@@ -5,6 +5,7 @@
 
 package com.devket.workout.importer;
 
+import com.devket.workout.service.ExerciseTargetService;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -16,6 +17,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
@@ -26,6 +28,9 @@ import org.springframework.core.io.Resource;
  *  @version $Revision: #1 $ submitted $DateTime: 2013/08/28 10:06:00 $ by $Author: CROSTA $	
  */
 public final class Importer {
+
+    @Autowired
+    private ExerciseTargetService exerciseTargetService;
 
 	//tcTODO rename from main -- temp for debugging
 	public static final void main(String[] args) throws IOException {
@@ -48,6 +53,12 @@ public final class Importer {
 		// tcTODO first, wire up with web app... need to use Spring Data to access Repository.
 		// use the DTO list to import the data in appropriate table order:
 		// 1. Targets 2. Exercises
+
+        for (ExerciseImportDTO dto : exercisesToImport) {
+            for (String aTarget : dto.getTargets()) {
+                // tcTODO does this target exist in the DB? if not, create it.
+            }
+        }
 
 	}
 
