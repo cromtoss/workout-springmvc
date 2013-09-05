@@ -67,4 +67,10 @@ public class ExerciseServiceImpl implements ExerciseService {
 
         return found;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Exercise findByName(String name) {
+        return exerciseRepository.findByName(name);
+    }
 }

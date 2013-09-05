@@ -15,10 +15,15 @@ import java.util.List;
  */
 public interface ExerciseTargetService {
 
-    public ExerciseTarget create(ExerciseTarget exerciseTarget);
-    public ExerciseTarget delete(long id) throws ExerciseTargetNotFoundException;
-    public List<ExerciseTarget> findAll();
-    public ExerciseTarget findById(long id);
-    public ExerciseTarget findByTargetCode(String targetCode);
-    public ExerciseTarget update(ExerciseTarget exerciseTarget) throws ExerciseTargetNotFoundException;
+    ExerciseTarget create(ExerciseTarget exerciseTarget);
+
+    ExerciseTarget delete(long id) throws ExerciseTargetNotFoundException;
+
+    List<ExerciseTarget> findAll();
+
+    ExerciseTarget findById(long id);
+
+    ExerciseTarget findByTargetCode(String targetCode);
+
+    ExerciseTarget update(ExerciseTarget exerciseTarget) throws ExerciseTargetNotFoundException;
 }

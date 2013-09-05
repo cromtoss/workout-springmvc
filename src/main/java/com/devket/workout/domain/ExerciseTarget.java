@@ -1,5 +1,6 @@
 package com.devket.workout.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,7 +18,9 @@ public class ExerciseTarget {
 	@GeneratedValue
 	private long id;
 
+    @Column(unique = true)
 	private String targetCode;
+
 	private String targetDescription;
 
 

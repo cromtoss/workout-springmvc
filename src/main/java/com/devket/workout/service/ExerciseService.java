@@ -12,9 +12,15 @@ import java.util.List;
  */
 public interface ExerciseService {
 
-    public Exercise create(Exercise exercise);
-    public Exercise delete(long id) throws ExerciseNotFoundException;
-    public List<Exercise> findAll();
-    public Exercise findById(long id);
-    public Exercise update(Exercise exercise) throws ExerciseNotFoundException;
+    Exercise create(Exercise exercise);
+
+    Exercise delete(long id) throws ExerciseNotFoundException;
+
+    List<Exercise> findAll();
+
+    Exercise findById(long id);
+
+    Exercise findByName(String name);
+
+    Exercise update(Exercise exercise) throws ExerciseNotFoundException;
 }

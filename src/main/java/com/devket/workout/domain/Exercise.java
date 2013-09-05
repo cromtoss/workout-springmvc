@@ -1,13 +1,9 @@
 package com.devket.workout.domain;
 
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 /**
  * tcTODO
@@ -22,7 +18,9 @@ public class Exercise {
 	@GeneratedValue
 	private long id;
 
+    @Column(unique = true)
 	private String name;
+
 	private String description;
 	private String imagePath;
 

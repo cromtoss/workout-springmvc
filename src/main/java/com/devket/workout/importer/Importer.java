@@ -5,6 +5,9 @@
 
 package com.devket.workout.importer;
 
+import com.devket.workout.domain.Exercise;
+import com.devket.workout.domain.ExerciseTarget;
+import com.devket.workout.service.ExerciseService;
 import com.devket.workout.service.ExerciseTargetService;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -22,7 +25,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 /**
- *  //tcTODO
+ *  Object that knows how to populate an empty database with data from a JSON file
+ *  supplied on the classpath.
  *
  *  @author Tom Cross
  *  @version $Revision: #1 $ submitted $DateTime: 2013/08/28 10:06:00 $ by $Author: CROSTA $	
@@ -30,10 +34,13 @@ import org.springframework.core.io.Resource;
 public final class Importer {
 
     @Autowired
+    private ExerciseService exerciseService;
+
+    @Autowired
     private ExerciseTargetService exerciseTargetService;
 
-	//tcTODO rename from main -- temp for debugging
-	public static final void main(String[] args) throws IOException {
+	//tcTODO link up with controller/web framework
+	public void doImport() throws IOException {
 
 		// read exercises.json from classpath
 		final Resource jsonResource = new ClassPathResource("exercises.json");
@@ -50,14 +57,42 @@ public final class Importer {
 			exercisesToImport.add(gson.fromJson(element, ExerciseImportDTO.class));
 		}
 
-		// tcTODO first, wire up with web app... need to use Spring Data to access Repository.
 		// use the DTO list to import the data in appropriate table order:
 		// 1. Targets 2. Exercises
+        // tcTODO add ability to update existing DB records??
 
-        for (ExerciseImportDTO dto : exercisesToImport) {
-            for (String aTarget : dto.getTargets()) {
-                // tcTODO does this target exist in the DB? if not, create it.
+        for (ExerciseImportDTO anExercise : exercisesToImport) {
+
+            // Build the list of ExerciseTarget objects for this exercise.
+            final List<ExerciseTarget> exerciseTargets = new ArrayList<>();
+
+            for (String aCode : anExercise.getTargets()) {
+                // Does this target exist in the DB? if not, create it.
+                final ExerciseTarget foundTarget = exerciseTargetService.findByTargetCode(aCode);
+                if (null == foundTarget) {
+                    final ExerciseTarget newTarget = new ExerciseTarget();
+                    newTarget.setTargetCode(aCode);
+                    newTarget.setTargetDescription(aCode);
+                    exerciseTargetService.create(newTarget);
+                    exerciseTargets.add(newTarget);
+                } else {
+                    exerciseTargets.add(foundTarget);
+                }
             }
+
+            // Does this exercise exist in the DB? if not, create it.
+            final Exercise foundExercise = exerciseService.findByName(anExercise.getName());
+            if (null == foundExercise) {
+                // make new exercise.
+                final Exercise newExercise = new Exercise();
+                newExercise.setName(anExercise.getName());
+                newExercise.setExerciseTarget(exerciseTargets);
+                newExercise.setDescription(anExercise.getDescription());
+                newExercise.setImagePath(anExercise.getImagePath());
+
+                exerciseService.create(newExercise);
+            }
+
         }
 
 	}
