@@ -10,9 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 /**
- * tcTODO
- * <p/>
- * Created: 8/11/13 12:37 PM
+ * Spring web application initializer. Replaces web.xml configuration entries.
+ *
+ * @author Tom Cross
+ * @version $Revision: #1 $ submitted $DateTime: 2013/09/16 09:32:00 $ by $Author: CROSTA $
  */
 public final class Initializer implements WebApplicationInitializer {
 
@@ -22,7 +23,10 @@ public final class Initializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        final AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
+        // Static resource handling using "default" servlet -- for certain file types.
+        servletContext.getServletRegistration("default").addMapping("*.js", "*.css", "*.jpg", "*.gif", "*.png");
+
+		final AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
         ctx.register(WebAppConfiguration.class);
 
         servletContext.addListener(new ContextLoaderListener(ctx));

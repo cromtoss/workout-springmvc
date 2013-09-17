@@ -8,7 +8,8 @@ import javax.persistence.*;
 /**
  * tcTODO
  *
- * Created: 7/21/13 5:28 PM
+ * @author Tom Cross
+ * @version $Revision: #1 $ submitted $DateTime: 2013/09/16 09:32:00 $ by $Author: CROSTA $
  */
 
 @Entity

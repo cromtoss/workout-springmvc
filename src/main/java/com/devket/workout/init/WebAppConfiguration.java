@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.thymeleaf.spring3.SpringTemplateEngine;
 import org.thymeleaf.spring3.view.ThymeleafViewResolver;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
 import javax.annotation.Resource;
@@ -26,8 +26,9 @@ import java.util.Properties;
 
 /**
  * The main Spring configuration file for the web application.
- * <p/>
- * Created: 8/3/13 3:16 PM
+ *
+ * @author Tom Cross
+ * @version $Revision: #1 $ submitted $DateTime: 2013/09/16 09:32:00 $ by $Author: CROSTA $
  */
 
 @Configuration
@@ -122,7 +123,7 @@ public class WebAppConfiguration {
 
    	@Bean
    	public ViewResolver viewResolver() {
-        final TemplateResolver templateResolver = new ClassLoaderTemplateResolver(); //thymeleaf template resolver
+        final TemplateResolver templateResolver = new ServletContextTemplateResolver(); //thymeleaf template resolver; can resolve from the servlet root
         templateResolver.setTemplateMode("XHTML");
         templateResolver.setPrefix("/WEB-INF/templates/");
         templateResolver.setSuffix(".html");
@@ -133,8 +134,6 @@ public class WebAppConfiguration {
         final ThymeleafViewResolver viewResolver = new ThymeleafViewResolver(); //thymeleaf implementation for Spring ViewResolver.
         viewResolver.setTemplateEngine(templateEngine);
 		viewResolver.setOrder(1);
-		final String[] viewNames = {"*.html","*.xhtml"};
-		viewResolver.setViewNames(viewNames);
 
    		return viewResolver;
    	}

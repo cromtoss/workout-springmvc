@@ -2,8 +2,9 @@ package com.devket.workout.exception;
 
 /**
  * tcTODO
- * <p/>
- * Created: 8/3/13 3:38 PM
+ *
+ * @author Tom Cross
+ * @version $Revision: #1 $ submitted $DateTime: 2013/09/16 09:32:00 $ by $Author: CROSTA $
  */
 public final class ExerciseNotFoundException extends Exception {
 

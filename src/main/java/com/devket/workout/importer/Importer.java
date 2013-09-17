@@ -23,6 +23,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
 
 /**
  *  Object that knows how to populate an empty database with data from a JSON file
@@ -31,6 +32,8 @@ import org.springframework.core.io.Resource;
  *  @author Tom Cross
  *  @version $Revision: #1 $ submitted $DateTime: 2013/08/28 10:06:00 $ by $Author: CROSTA $	
  */
+
+@Component
 public final class Importer {
 
     @Autowired
