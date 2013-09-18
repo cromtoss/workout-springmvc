@@ -8,6 +8,7 @@ package com.devket.workout.controller;
 import com.devket.workout.importer.Importer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +22,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 
 @Controller
-public final class NavigationController {
+public final class NavigationController{
 
 	@Autowired
 	private Importer importer;
+
 
 	@RequestMapping(value={"/emberStart"}, method=RequestMethod.GET)
 	public String getEmberStart() {
@@ -35,7 +37,4 @@ public final class NavigationController {
 	public String getIndex(ModelMap modelMap) {
 		return "index";
 	}
-
-
-
 }

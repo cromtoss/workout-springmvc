@@ -17,23 +17,24 @@ import javax.servlet.ServletRegistration;
  */
 public final class Initializer implements WebApplicationInitializer {
 
-    // see https://github.com/Fruzenshtein/spr-mvc-hib/blob/master/src/main/java/com/sprhib/init/Initializer.java
-    // see http://stackoverflow.com/questions/7271801/spring-3-1-java-configuration-autowired-configuration-and-profile-challen
-    // see http://www.rockhoppertech.com/blog/spring-mvc-configuration-without-xml/
-
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
+
         // Static resource handling using "default" servlet -- for certain file types.
         servletContext.getServletRegistration("default").addMapping("*.js", "*.css", "*.jpg", "*.gif", "*.png");
 
-		final AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-        ctx.register(WebAppConfiguration.class);
+		//Load application context
+		final AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+		rootContext.register(AppConfig.class);
+		rootContext.setDisplayName("Workout-o-Matic 5000");
 
-        servletContext.addListener(new ContextLoaderListener(ctx));
-        ctx.setServletContext(servletContext);
+		//Context loader listener
+		servletContext.addListener(new ContextLoaderListener(rootContext));
 
-        final ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
-        servlet.addMapping("/");
-        servlet.setLoadOnStartup(1);
+		//Dispatcher servlet
+		final ServletRegistration.Dynamic dispatcher =
+				servletContext.addServlet("dispatcher", new DispatcherServlet(rootContext));
+		dispatcher.setLoadOnStartup(1);
+		dispatcher.addMapping("/");
     }
 }
